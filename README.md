@@ -19,7 +19,7 @@ pip install fake_useragent
 ## Usage
 To run the script, the user must navigate to the directory where the script is saved using the command prompt or terminal. Then, the user can enter the following command:
 ```python
-python issaplus_scraper.py
+python parser.py
 ```
 The script will start running and will scrape data from the website. The scraped data will be saved in JSON files, with each page of the website saved in a separate file.
 
