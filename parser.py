@@ -4,6 +4,7 @@ import json
 import time
 import random
 from fake_useragent import UserAgent
+
 ua = UserAgent()
 
 def get_data(url):
@@ -14,7 +15,7 @@ def get_data(url):
     links_count = 5
     print(f'Всего страниц {links_count}')
 
-    for links in range(0, 6):
+    for links in range(1, 6):
         req = requests.get(url + f'?page={links}', headers=headers)
 
         with open(f'cloth_{links}.html', 'w') as file:
@@ -43,26 +44,18 @@ def get_data(url):
                     'Title': title,
                     'Price': price,
                     'Link': link,
-                    # 'Discount': discount or nodiscount
                 }
             )
 
-            # time.sleep(random.randrange(2, 4))
+        links_count -= 1
+        print(f'Страница #{links} обработана, осталось страниц #{links_count}')
+        if links_count==0:
+            print('Работа закончена')
+        time.sleep(random.randrange(2, 4))
 
         # print(title+'\n'+price+'\n'+link+'\n') # вывод данных
 
-    with open(f'data_{links}.json', 'w', encoding='utf=8') as jfile:
-        json.dump(products, jfile, indent=4, ensure_ascii=False)
-print('done')
+        with open(f'data_{links}.json', 'w', encoding='utf=8') as jfile:
+            json.dump(products, jfile, indent=4, ensure_ascii=False)
+
 get_data("https://issaplus.com/odezhda/")
-
-
-
-        # picture_find = i.find('div', class_='images').find('img', itemprop="image").get('src')
-        # print(picture_find)
-
-        # try:
-        #     discount_find = i.find('div', class_='badge low-price')
-        #     discount = discount_find.text
-        # except:
-        #     nodiscount=('No discount')
